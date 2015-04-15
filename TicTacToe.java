@@ -1,17 +1,20 @@
 
-
+// package tictactoe;
 import java.util.Scanner;
 
-public class TicTacToe extends GameBoard{
-
+public class TicTacToe extends GameBoard {
+	public static final int ROWS = 3;
+	public static final int COLS = 3;
+	private GameBoard board;
 
 	// public char[][] board;
 
 	public TicTacToe() {
-		GameBoard board = new GameBoard();
+	    board = new GameBoard(ROWS,COLS);
 		// board = new char[ROWS][COLS];
 		System.out.println("Welcome to Tic-Tac-Toe.  Please make your move selection by entering a number 1-9 corresponding to the movement option on the right.");
-		// setBoard();
+		board.initBoard();
+		board.drawBoard();
 		// printBoard();
 	}
 
