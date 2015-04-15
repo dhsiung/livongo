@@ -40,9 +40,12 @@ public class GameBoard extends Cell{
 	        System.out.println();
 	        if (row < ROWS - 1) System.out.println("-----------");
       	}
+      	System.out.println();
     }
 
-
+    public boolean check_win (Marker player) {
+    	return false;
+    }
 	
 	// public static void main (String[] args){
 
