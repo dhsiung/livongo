@@ -7,7 +7,7 @@ public class GameBoard extends Cell{
 
 
 	Cell[][] cells = new Cell[ROWS][COLS];
-	// int currRow, currCol;
+	int currRow, currCol;
 	int row, col;
 
 	public GameBoard(){
@@ -34,14 +34,12 @@ public class GameBoard extends Cell{
     public void drawBoard() {
     	for (int row = 0; row < ROWS; ++row) {
          	for (int col = 0; col < COLS; ++col) {
-            	cells[row][col].draw();   // each cell paints itself
+            	cells[row][col].draw();   
             	if (col < COLS - 1) System.out.print("|");
-         }
-         System.out.println();
-         if (row < ROWS - 1) {
-            System.out.println("-----------");
-         }
-      }
+         	}
+	        System.out.println();
+	        if (row < ROWS - 1) System.out.println("-----------");
+      	}
     }
 
 
