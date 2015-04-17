@@ -68,6 +68,7 @@ public class TicTacToe extends GameBoard {
 			int input = in.nextInt();
 			boolean validInput = false;
 			do {
+				//error handling of input outside of gameboard dimensions
 				if (input>=1 && input <= 9) {
 					switch (input) {
 						case 1: currRow = 0; currCol=0; cellPosition = "upper left"; break;
@@ -80,7 +81,7 @@ public class TicTacToe extends GameBoard {
 						case 8: currRow = 2; currCol=1; cellPosition = "lower middle"; break; 
 						case 9: currRow = 2; currCol=2; cellPosition = "lower right"; break;
 					}
-					// System.out.println("You have put an X in the " + cellPosition + ".");
+					// error handling of cells that are already taken
 					if ( board.cells[currRow][currCol].content != Marker.BLANK ) {
 						System.out.println("That cell is already taken! Pick a different one!");
 						makeMove(currentPlayer);
@@ -96,6 +97,8 @@ public class TicTacToe extends GameBoard {
 				}
 				else {
 					System.out.println("Invalid input. Please try again.");
+					makeMove(currentPlayer);
+					break;
 				}
 
 			} while (!validInput); 
@@ -123,8 +126,6 @@ public class TicTacToe extends GameBoard {
 			board.currRow = currRow;
 			board.currCol = currCol;
 			System.out.println("I will put an O in the " + cellPosition + ".");
-			// System.out.println("I will put an O in the " + cellPosition + ".");
-
     	}
     }
 
@@ -143,52 +144,72 @@ public class TicTacToe extends GameBoard {
 	/*
 method not used
     public void aiMove(){
-    	Random r = new Random();
-		int low = 1;
-		int high = 10;
-		int randomNum = r.nextInt(high-low) + low;
-		System.out.println("Random # : " + randomNum);
-		switch (randomNum) {
-			case 1: currRow = 0; currCol=0; break;
-			case 2: currRow = 0; currCol=1; break;
-			case 3: currRow = 0; currCol=2; break;
-			case 4: currRow = 1; currCol=0; break;
-			case 5: currRow = 1; currCol=1; break;
-			case 6: currRow = 1; currCol=2; break;
-			case 7: currRow = 2; currCol=0; break;
-			case 8: currRow = 2; currCol=1; break; 
-			case 9: currRow = 2; currCol=2; break;
-		}
-		// if current cell is taken, pick another one
-		if ( board.cells[currRow][currCol].content != Marker.BLANK)
-			aiMove();
-		board.cells[currRow][currCol].content = Marker.CIRCLE;
-		board.currRow = currRow;
-		board.currCol = currCol;
+			Random r = new Random();
+			int low = 1;
+			int high = 10;
+			int randomNum = r.nextInt(high-low) + low;
+			switch (randomNum) {
+				case 1: currRow = 0; currCol=0; cellPosition = "upper left"; break;
+				case 2: currRow = 0; currCol=1; cellPosition = "upper middle"; break;
+				case 3: currRow = 0; currCol=2; cellPosition = "upper right"; break;
+				case 4: currRow = 1; currCol=0; cellPosition = "middle left"; break;
+				case 5: currRow = 1; currCol=1; cellPosition = "middle"; break;
+				case 6: currRow = 1; currCol=2; cellPosition = "middle right"; break;
+				case 7: currRow = 2; currCol=0; cellPosition = "lower left"; break;
+				case 8: currRow = 2; currCol=1; cellPosition = "lower middle"; break; 
+				case 9: currRow = 2; currCol=2; cellPosition = "lower right"; break;
+			}
+			while ( board.cells[currRow][currCol].content != Marker.BLANK) {
+				makeMove(currentPlayer);
+			}
+			board.cells[currRow][currCol].content = Marker.CIRCLE;
+			board.currRow = currRow;
+			board.currCol = currCol;
+			System.out.println("I will put an O in the " + cellPosition + ".");
     }
     */
 
     /*
 method not used
 	public void playerInput() {
-		System.out.print("Where to? ");
-		int input = in.nextInt();
 		String cellPosition="";
-		switch (input) {
-			case 1: currRow = 0; currCol=0; cellPosition = "upper left"; break;
-			case 2: currRow = 0; currCol=1; cellPosition = "upper middle"; break;
-			case 3: currRow = 0; currCol=2; cellPosition = "upper right"; break;
-			case 4: currRow = 1; currCol=0; cellPosition = "middle left"; break;
-			case 5: currRow = 1; currCol=1; cellPosition = "middle"; break;
-			case 6: currRow = 1; currCol=2; cellPosition = "middle right"; break;
-			case 7: currRow = 2; currCol=0; cellPosition = "lower left"; break;
-			case 8: currRow = 2; currCol=1; cellPosition = "lower middle"; break; 
-			case 9: currRow = 2; currCol=2; cellPosition = "lower right"; break;
-		}
-		board.cells[currRow][currCol].content = Marker.CROSS;
-		board.currRow = currRow;
-		board.currCol = currCol;
-		System.out.println("You have put an X in the " + cellPosition + ".");
+    	if (currentPlayer == Marker.CROSS) {
+    		System.out.print("Where to? ");
+			int input = in.nextInt();
+			boolean validInput = false;
+			do {
+				//error handling of input outside of gameboard dimensions
+				if (input>=1 && input <= 9) {
+					switch (input) {
+						case 1: currRow = 0; currCol=0; cellPosition = "upper left"; break;
+						case 2: currRow = 0; currCol=1; cellPosition = "upper middle"; break;
+						case 3: currRow = 0; currCol=2; cellPosition = "upper right"; break;
+						case 4: currRow = 1; currCol=0; cellPosition = "middle left"; break;
+						case 5: currRow = 1; currCol=1; cellPosition = "middle"; break;
+						case 6: currRow = 1; currCol=2; cellPosition = "middle right"; break;
+						case 7: currRow = 2; currCol=0; cellPosition = "lower left"; break;
+						case 8: currRow = 2; currCol=1; cellPosition = "lower middle"; break; 
+						case 9: currRow = 2; currCol=2; cellPosition = "lower right"; break;
+					}
+					// error handling of cells that are already taken
+					if ( board.cells[currRow][currCol].content != Marker.BLANK ) {
+						System.out.println("That cell is already taken! Pick a different one!");
+						makeMove(currentPlayer);
+						break;
+					}
+					else {
+						board.cells[currRow][currCol].content = Marker.CROSS;
+						board.currRow = currRow;
+						board.currCol = currCol;
+						System.out.println("You have put an X in the " + cellPosition + ".");
+						validInput = true; //exit the loop because its a valid input
+					}
+				}
+				else {
+					System.out.println("Invalid input. Please try again.");
+				}
+
+			} while (!validInput); 
 	}
 	*/
 
