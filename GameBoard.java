@@ -37,13 +37,17 @@ public class GameBoard extends Cell{
      * Marker at each position (BLANK, CROSS, CIRCLE)
      */
     public void drawBoard() {
+    	System.out.println("Board:              Movement Options:");
+    	int movementOption = 1;
     	for (int row = 0; row < ROWS; ++row) {
          	for (int col = 0; col < COLS; ++col) {
             	cells[row][col].draw();   
             	if (col < COLS - 1) System.out.print("|");
+            	
          	}
-	        System.out.println();
-	        if (row < ROWS - 1) System.out.println("-----------");
+         	System.out.println("          " + movementOption++ + " | " + movementOption++ + " | " + movementOption++);
+	        // System.out.println();
+	        if (row < ROWS - 1) System.out.println("-----------         -----------");
       	}
       	System.out.println();
     }

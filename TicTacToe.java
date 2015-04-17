@@ -172,9 +172,7 @@ method not used
     /*
 method not used
 	public void playerInput() {
-		String cellPosition="";
-    	if (currentPlayer == Marker.CROSS) {
-    		System.out.print("Where to? ");
+		System.out.print("Where to? ");
 			int input = in.nextInt();
 			boolean validInput = false;
 			do {
@@ -207,6 +205,8 @@ method not used
 				}
 				else {
 					System.out.println("Invalid input. Please try again.");
+					makeMove(currentPlayer);
+					break;
 				}
 
 			} while (!validInput); 
