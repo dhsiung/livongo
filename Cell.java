@@ -1,5 +1,3 @@
-// package tictactoe;
-
 public class Cell{
 	public enum Marker {
 		BLANK, CROSS, CIRCLE

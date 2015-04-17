@@ -4,10 +4,9 @@ public class GameBoard extends Cell{
 	
 	public static final int ROWS = 3;
 	public static final int COLS = 3;
-
+	int currRow, currCol = 0;
 
 	Cell[][] cells = new Cell[ROWS][COLS];
-	int currRow, currCol;
 	int row, col;
 
 	public GameBoard(){
@@ -44,7 +43,6 @@ public class GameBoard extends Cell{
 
     public boolean check_win (Marker player) {
     	// 3 in a row like -
-    	// System.out.println("1: "+cells[currRow][0].content);
     	System.out.println("player: " + player);
     	if (cells[currRow][0].content == player &&
     		cells[currRow][1].content == player &&
@@ -71,6 +69,17 @@ public class GameBoard extends Cell{
 	    		cells[2][0].content == player) {
     		return true;
     	}
+//     	System.out.println("Current row: " + currRow);
+//     	System.out.println("Current column: " + currCol);
+// System.out.println("1: "+cells[0][0].content);
+// System.out.println("2: "+cells[0][1].content);
+// System.out.println("3: "+cells[0][2].content);
+// System.out.println("4: "+cells[1][0].content);
+// System.out.println("5: "+cells[1][1].content);
+// System.out.println("6: "+cells[1][2].content);
+// System.out.println("7: "+cells[2][0].content);
+// System.out.println("8: "+cells[2][1].content);
+// System.out.println("9: "+cells[2][2].content);
     	return false;
     }
 
