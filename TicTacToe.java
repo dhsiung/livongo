@@ -28,14 +28,17 @@ public class TicTacToe extends GameBoard {
 			if (currentStatus == GameStatus.PLAYER_WIN) {
 				board.drawBoard();
 				System.out.println("You have beaten my AI!");
+				break; // this break is purely so I don't print the board again.
 			}
 			else if (currentStatus == GameStatus.AI_WIN) {
 				board.drawBoard();
 				System.out.println("Only a fool would think they could beat me!");
+				break; // this break is purely so I don't print the board again.
 			}
 			else if (currentStatus == GameStatus.TIE) {
 				board.drawBoard();
 				System.out.println("It's a tie!");
+				break; // this break is purely so I don't print the board again.
 			}
 			changePlayer();	//switch between the player and AI
 			board.drawBoard();
@@ -119,13 +122,15 @@ public class TicTacToe extends GameBoard {
 				case 8: currRow = 2; currCol=1; cellPosition = "lower middle"; break; 
 				case 9: currRow = 2; currCol=2; cellPosition = "lower right"; break;
 			}
-			while ( board.cells[currRow][currCol].content != Marker.BLANK) {
+			if ( board.cells[currRow][currCol].content != Marker.BLANK) {
 				makeMove(currentPlayer);
 			}
-			board.cells[currRow][currCol].content = Marker.CIRCLE;
-			board.currRow = currRow;
-			board.currCol = currCol;
-			System.out.println("I will put an O in the " + cellPosition + ".");
+			else {
+				board.cells[currRow][currCol].content = Marker.CIRCLE;
+				board.currRow = currRow;
+				board.currCol = currCol;
+				System.out.println("I will put an O in the " + cellPosition + ".");
+			}
     	}
     }
 
