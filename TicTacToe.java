@@ -68,6 +68,10 @@ public class TicTacToe extends GameBoard {
 		String cellPosition="";
     	if (currentPlayer == Marker.CROSS) {
     		System.out.print("Where to? ");
+    		while (!in.hasNextInt()) {
+    			in.next();
+    			System.out.print("Please enter an integer...Where to? ");
+    		}
 			int input = in.nextInt();
 			boolean validInput = false;
 			do {
