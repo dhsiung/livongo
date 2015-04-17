@@ -44,7 +44,7 @@ public class GameBoard extends Cell{
 
     public boolean check_win (Marker player) {
     	// 3 in a row like -
-    	System.out.println("1: "+cells[currRow][0].content);
+    	// System.out.println("1: "+cells[currRow][0].content);
     	System.out.println("player: " + player);
     	if (cells[currRow][0].content == player &&
     		cells[currRow][1].content == player &&
@@ -71,7 +71,17 @@ public class GameBoard extends Cell{
 	    		cells[2][0].content == player) {
     		return true;
     	}
-    
     	return false;
+    }
+
+    public boolean check_tie() {
+    	for (int row = 0; row < ROWS; ++row) {
+         for (int col = 0; col < COLS; ++col) {
+            if (cells[row][col].content == Marker.BLANK) {
+               return false; 
+            }
+         }
+      }
+      return true;
     }
 }

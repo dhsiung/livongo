@@ -27,6 +27,8 @@ int currRow, currCol = 0;
 			playerInput();
 			aiMove();
 			// board.drawBoard();
+			// makeMove(currentPlayer);
+
 			updateGameStatus(currentPlayer);
 			if (currentStatus == GameStatus.PLAYER_WIN) {
 				System.out.println("You have beaten my AI!");
@@ -37,6 +39,7 @@ int currRow, currCol = 0;
 			else if (currentStatus == GameStatus.TIE) {
 				System.out.println("It's a tie!");
 			}
+			changePlayer();
 		} while (currentStatus == GameStatus.PLAYING); 
 	}
 
@@ -68,13 +71,17 @@ int currRow, currCol = 0;
 	}
 
 	public void updateGameStatus(Marker player) {
+		System.out.println("checking game status");
+		System.out.println("check win status: " + board.check_win(player));
 		if ( board.check_win(player) ) {
 			currentStatus = (player == Marker.CROSS) ? GameStatus.PLAYER_WIN : GameStatus.AI_WIN;
 			System.out.println("HIT THE LOOP!");
 		}
-		System.out.println(board.check_win(player));
+		// System.out.println(board.check_win(player));
 		// System.out.println("testest!");
-		// else if (board.)
+		else if (board.check_tie()){
+			currentStatus = GameStatus.TIE;
+		}
 	}
 
     public void aiMove(){
@@ -82,6 +89,7 @@ int currRow, currCol = 0;
 		int low = 1;
 		int high = 10;
 		int randomNum = r.nextInt(high-low) + low;
+		System.out.println("Random # : " + randomNum);
 		switch (randomNum) {
 			case 1: currRow = 0; currCol=0; break;
 			case 2: currRow = 0; currCol=1; break;
@@ -93,11 +101,61 @@ int currRow, currCol = 0;
 			case 8: currRow = 2; currCol=1; break; 
 			case 9: currRow = 2; currCol=2; break;
 		}
-		if ( board.cells[currRow][currCol].content == Marker.CROSS)
+		// if current cell is taken, pick another one
+		if ( board.cells[currRow][currCol].content != Marker.BLANK)
 			aiMove();
 		board.cells[currRow][currCol].content = Marker.CIRCLE;
-
     }
+
+    public void makeMove(Marker currentPlayer) {
+    	if (currentPlayer == Marker.CROSS) {
+    		System.out.print("Where to? ");
+			int input = in.nextInt();
+			String cellPosition="";
+			switch (input) {
+				case 1: currRow = 0; currCol=0; cellPosition = "upper left"; break;
+				case 2: currRow = 0; currCol=1; cellPosition = "upper middle"; break;
+				case 3: currRow = 0; currCol=2; cellPosition = "upper right"; break;
+				case 4: currRow = 1; currCol=0; cellPosition = "middle left"; break;
+				case 5: currRow = 1; currCol=1; cellPosition = "middle"; break;
+				case 6: currRow = 1; currCol=2; cellPosition = "middle right"; break;
+				case 7: currRow = 2; currCol=0; cellPosition = "lower left"; break;
+				case 8: currRow = 2; currCol=1; cellPosition = "lower middle"; break; 
+				case 9: currRow = 2; currCol=2; cellPosition = "lower right"; break;
+			}
+			board.cells[currRow][currCol].content = Marker.CROSS;
+			System.out.println("You have put an X in the " + cellPosition + ".");
+			// System.out.println("currRow: " + currRow + "  currcol: " + currCol);
+    	}
+    	else if (currentPlayer == Marker.CIRCLE) {
+			Random r = new Random();
+			int low = 1;
+			int high = 10;
+			int randomNum = r.nextInt(high-low) + low;
+			System.out.println("Random # : " + randomNum);
+			switch (randomNum) {
+				case 1: currRow = 0; currCol=0; break;
+				case 2: currRow = 0; currCol=1; break;
+				case 3: currRow = 0; currCol=2; break;
+				case 4: currRow = 1; currCol=0; break;
+				case 5: currRow = 1; currCol=1; break;
+				case 6: currRow = 1; currCol=2; break;
+				case 7: currRow = 2; currCol=0; break;
+				case 8: currRow = 2; currCol=1; break; 
+				case 9: currRow = 2; currCol=2; break;
+			}
+			if ( board.cells[currRow][currCol].content != Marker.BLANK)
+				makeMove(currentPlayer);
+			board.cells[currRow][currCol].content = Marker.CIRCLE;
+    	}
+    }
+
+    public void changePlayer() {
+    	if (currentPlayer == Marker.CROSS) currentPlayer = Marker.CIRCLE;
+    	else if (currentPlayer == Marker.CIRCLE) currentPlayer = Marker.CROSS;
+    	System.out.println("Player changed to: " + currentPlayer);
+    }
+
 	public static void main (String[] args) {
 		TicTacToe ttt = new TicTacToe();
 	}
